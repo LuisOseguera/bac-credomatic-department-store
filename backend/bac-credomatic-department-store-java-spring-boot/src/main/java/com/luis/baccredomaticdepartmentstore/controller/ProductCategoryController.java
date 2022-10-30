@@ -1,10 +1,9 @@
 package com.luis.baccredomaticdepartmentstore.controller;
 
+import com.luis.baccredomaticdepartmentstore.model.ProductCategory;
 import com.luis.baccredomaticdepartmentstore.repository.ProductCategoryRepository;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/product-category")
@@ -19,5 +18,36 @@ public class ProductCategoryController {
     @GetMapping
     public ResponseEntity getAllProductCategories() {
         return ResponseEntity.ok(this.productCategoryRepository.findAll());
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity getOneProductCategory(@PathVariable Long id) {
+        return ResponseEntity.ok(this.productCategoryRepository.findById(id).get());
+    }
+
+    @PostMapping
+    public ResponseEntity createProductCategory(@RequestBody ProductCategory productCategory) {
+        return ResponseEntity.status(201).body(this.productCategoryRepository.save(productCategory));
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity updateProductCategory(@PathVariable Long id, @RequestBody ProductCategory productCategory) {
+
+        ProductCategory productCategoryToUpdate = this.productCategoryRepository.findById(id).get();
+
+        productCategoryToUpdate.setName(productCategory.getName());
+        productCategoryToUpdate.setDescription(productCategory.getDescription());
+
+        return ResponseEntity.ok(this.productCategoryRepository.save(productCategoryToUpdate));
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity deleteProductCategory(@PathVariable Long id) {
+
+        ProductCategory productCategory = this.productCategoryRepository.findById(id).get();
+
+        this.productCategoryRepository.deleteById(id);
+
+        return ResponseEntity.ok(productCategory);
     }
 }

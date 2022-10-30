@@ -1,9 +1,6 @@
 package com.luis.baccredomaticdepartmentstore.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Product {
@@ -18,16 +15,23 @@ public class Product {
 
     private Integer amount;
 
+    private Float price;
+
     private String image_path;
 
     public Product() {
     }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_category_id")
+    private ProductCategory productCategory;
 
     public Product(Long id, String name, String description, Integer amount, String image_path) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.amount = amount;
+        this.price = price;
         this.image_path = image_path;
     }
 
@@ -63,11 +67,19 @@ public class Product {
         this.amount = amount;
     }
 
-    public String getimage_path() {
+    public String getImagePath() {
         return image_path;
     }
 
-    public void setimage_path(String image_path) {
+    public void setImagePath(String image_path) {
         this.image_path = image_path;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
     }
 }
