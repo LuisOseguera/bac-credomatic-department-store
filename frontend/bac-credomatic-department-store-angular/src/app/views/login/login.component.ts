@@ -14,6 +14,7 @@ const globalEncryptionKey: string = 'l1998U04!11$';
 })
 export class LoginComponent implements OnInit {
   loginForm = new FormGroup({
+    name: new FormControl(''),
     email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
   });
@@ -26,12 +27,13 @@ export class LoginComponent implements OnInit {
 
   errorStatus: boolean = false;
   errorMessage: any = '';
+  newUser: boolean = false;
 
   ngOnInit(): void {
     this.checkLocalStorage();
   }
 
-  checkLocalStorage(){
+  checkLocalStorage() {
     if (localStorage.getItem('token_pass')) {
       this.router.navigate(['dashboard']);
     }
@@ -53,6 +55,26 @@ export class LoginComponent implements OnInit {
           this.errorMessage = 'Usuario y/o contraseña inválido.';
         }
       }
+    });
+  }
+
+  createUserOption(setBool: boolean) {
+    this.newUser = setBool;
+  }
+
+  createUser(userForm: any) {
+    userForm.password = this.encrDecr.set(
+      globalEncryptionKey,
+      userForm.password
+    );
+
+    this.userApiService.postUser(userForm).subscribe((data) => {
+      this.loginForm.reset();
+      this.newUser = false;
+    });
+
+    this.userApiService.sendEmail(userForm).subscribe((data) => {
+      console.log(data);
     });
   }
 }
