@@ -46,11 +46,12 @@
               <button type="submit" class="btn btn-primary btn-block" *ngIf="!newUser">Acceder</button>
               <button type="button" class="btn btn-primary btn-block" (click)="createUser(loginForm.value)"
                 *ngIf="newUser">Crear</button>
-              <button type="button" class="btn btn-light btn-block" (click)="createUserOption(true)" *ngIf="!newUser">Crear
-                usuario</button>
-              <button type="button" class="btn btn-light btn-block" *ngIf="newUser" (click)="createUserOption(false)">Volver
-                a acceder</button>
-              <div class="text-center my-2"><a href="#" class="link-primary text-center">¿Olvidaste tu contraseña?</a></div>
+              <button type="button" class="btn btn-light btn-block" (click)="createUserOption(true)"
+                *ngIf="!newUser">Crear usuario</button>
+              <button type="button" class="btn btn-light btn-block" *ngIf="newUser"
+                (click)="createUserOption(false)">Volver a acceder</button>
+              <div class="text-center my-2"><a [routerLink]="['/login']"
+                  class="link-primary text-center disabled">¿Olvidaste tu contraseña?</a></div>
             </div>
 
           </form>
