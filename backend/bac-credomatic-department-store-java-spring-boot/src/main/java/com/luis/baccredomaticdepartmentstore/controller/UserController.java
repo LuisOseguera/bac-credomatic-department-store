@@ -43,7 +43,7 @@ public class UserController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity delteUser(@PathVariable Long id) {
+    public ResponseEntity deleteUser(@PathVariable Long id) {
 
         User user = this.userRepository.findById(id).get();
 
