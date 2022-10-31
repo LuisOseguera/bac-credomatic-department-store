@@ -14,7 +14,7 @@
 	<name>bac-credomatic-department-store</name>
 	<description>Project requested by BAC Credomatic as part of my selection process for a job.</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
