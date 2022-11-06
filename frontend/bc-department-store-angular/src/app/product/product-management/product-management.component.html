@@ -1,0 +1,59 @@
+<app-header></app-header>
+<div class="container">
+  <div class="card my-4 p-2">
+
+    <h4 class="text-center my-2">Administrar Producto</h4>
+    <div class="my-2">
+      <form [formGroup]="productManagementForm" (ngSubmit)="manageForm(productManagementForm.value)" class="m-2">
+
+        <div class="form-group">
+          <label for="name">Nombre</label>
+          <input type="text" class="form-control" placeholder="Nombre del producto" formControlName="name" />
+        </div>
+
+        <div class="form-group">
+          <label for="description">Descripción</label>
+          <input type="text" class="form-control" placeholder="Descripción del producto"
+            formControlName="description" />
+        </div>
+
+        <div class="row">
+
+          <div class="form-group col-6">
+            <label for="amount">Cantidad</label>
+            <input type="text" class="form-control" placeholder="Cantidad del producto" formControlName="amount" />
+          </div>
+
+          <div class="form-group col-6">
+            <label for="price">Precio</label>
+            <input type="text" class="form-control" placeholder="Precio del producto" formControlName="price" />
+          </div>
+
+        </div>
+
+        <div class="alert alert-warning text-center" *ngIf="!productManagementForm.valid">
+          Asegúrate de llenar correctamente cada campo.
+        </div>
+
+        <div class="row">
+
+          <div class="d-flex justify-content-start col">
+            <button type="button" class="btn btn-danger mr-2 d-flex justify-content-start"
+              (click)="deleteForm()">Eliminar</button>
+          </div>
+
+          <div class="d-flex justify-content-end col">
+            <button type="button" class="btn btn-secundary mr-2 d-flex justify-content-end"
+              [routerLink]="['/product']">Cancelar</button>
+            <button type="submit" class="btn btn-primary mr-2  d-flex justify-content-end"
+              [disabled]="!productManagementForm.valid">Guardar</button>
+          </div>
+
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</div>
+<app-footer></app-footer>
